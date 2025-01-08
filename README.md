@@ -85,3 +85,7 @@ Após a execução, sua aplicação estará disponível em:
 ```bash
 http://localhost:8081
 ```
+
+### 4. **Diagrama**
+
+[Baixar ou Ver Diagrama em PDF](https://drive.google.com/drive/u/1/folders/1f4okF8AiSOoRMjUay4ZhFwGvRxC_oxR0)
