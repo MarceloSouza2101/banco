@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/cep/34567890"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "postalCode": "34567890",
+      "street": "Rua da Consolação",
+      "district": "Consolação",
+      "city": "São Paulo",
+      "uf": "SP"
+    }
+  }
+}
+

@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/cep/12345678"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "postalCode": "12345678",
+      "street": "Praça da Sé",
+      "district": "Sé",
+      "city": "São Paulo",
+      "uf": "SP"
+    }
+  }
+}
+

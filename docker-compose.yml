@@ -1,0 +1,49 @@
+version: '3.8'
+
+services:
+  db:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=AdminTesteSantander25
+    ports:
+      - "1433:1433"
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - db-data:/var/opt/mssql
+    networks:
+      - app-network
+
+  app:
+    build:
+      context: .  
+      dockerfile: Dockerfile  
+    ports:
+      - "8081:8081"  
+    environment:
+      - DB_HOST=db
+      - SPRING_DATASOURCE_URL=jdbc:sqlserver://db:1433;databaseName=master;trustServerCertificate=true
+      - SPRING_DATASOURCE_USERNAME=SA
+      - SPRING_DATASOURCE_PASSWORD=AdminTesteSantander25
+    depends_on:
+      - db
+      - wiremock
+    networks:
+      - app-network
+
+  wiremock:
+    image: wiremock/wiremock:2.31.0
+    ports:
+      - "8083:8080"  
+    volumes:
+      - ./wiremock/mappings:/home/wiremock/mappings 
+    command: --port 8080 --disable-banner   
+    networks:
+      - app-network
+
+volumes:
+  db-data:
+
+networks:
+  app-network:
+    driver: bridge

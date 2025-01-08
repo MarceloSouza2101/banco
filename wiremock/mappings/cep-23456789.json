@@ -1,0 +1,20 @@
+{
+  "request": {
+    "method": "GET",
+    "urlPattern": "/cep/23456789"
+  },
+  "response": {
+    "status": 200,
+    "headers": {
+      "Content-Type": "application/json"
+    },
+    "jsonBody": {
+      "postalCode": "23456789",
+      "street": "Avenida Paulista",
+      "district": "Bela Vista",
+      "city": "São Paulo",
+      "uf": "SP"
+    }
+  }
+}
+
