@@ -1,91 +1,106 @@
-# Gestão de Pessoas e Transações Bancárias ♨️
+# Produto Service 📦
 
-Este projeto é uma aplicação que gerencia o **cadastro de pessoas físicas**, **criação de contas bancárias** e **realização de transações**. A aplicação interage com um banco de dados para armazenar informações de usuários e transações realizadas.
+Este projeto é uma aplicação que fornece informações de produtos através de duas formas de consulta:
+
+- **Consulta por Filtro:** Permite buscar produtos com base em parâmetros específicos.  
+- **Consulta por ID:** Permite obter detalhes de um produto individual, buscando pelo seu identificador único.  
+
+A aplicação é construída com **Java 17**, utiliza **Maven** para gerenciamento de dependências, **Spring Boot** para estruturação do backend, e **WireMock** para simulação de APIs externas. O banco de dados é simulado com um arquivo JSON e o cache é mantido em memória utilizando o próprio Spring.
 
 ---
 
-## 🚀 Rodando a Aplicação com Docker Compose
+## 🚀 Rodando a Aplicação Localmente
 
-### 1. **Instalar Docker e Docker Compose**
+### ⚙️ Configurando Variáveis de Ambiente no Windows
 
-- **Instalar Docker no Linux**
+As variáveis de ambiente dizem ao sistema **onde encontrar o Java e o Maven**, necessários para compilar e rodar o projeto.
 
-Se você já tem o Docker instalado, pode ser uma boa ideia remover versões anteriores para evitar conflitos:
+---
 
-```bash
-sudo apt-get remove docker docker-engine docker.io containerd runc
-```
+#### 1️⃣ Abrir a configuração de variáveis de ambiente
 
-Primeiro, instale os pacotes necessários para adicionar o repositório Docker:
+1. Pressione `Win + S` e digite **variáveis de ambiente**.  
+2. Clique em **“Editar as variáveis de ambiente do sistema”**.  
+3. Na janela **Propriedades do Sistema**, clique em **Variáveis de Ambiente**.  
 
-```bash
-sudo apt-get update
-sudo apt-get install apt-transport-https ca-certificates curl software-properties-common
-```
+---
 
-Adicione o repositório oficial do Docker para Ubuntu/Debian:
+#### 2️⃣ Criar a variável `JAVA_HOME`
 
-```bash
-sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
-```
-Atualize os pacotes disponíveis:
+1. Em **Variáveis do Sistema**, clique em **Novo**.  
+2. Preencha:  
+   - **Nome da variável:** `JAVA_HOME`  
+   - **Valor da variável:** caminho da instalação do Java 17, por exemplo:  
+     ```
+     C:\Program Files\Java\jdk-17
+     ```  
+3. Clique em **OK**.  
 
-```bash
-sudo apt-get update
-```
+---
 
-Agora, instale a versão desejada do Docker:
+#### 3️⃣ Criar a variável `MAVEN_HOME`
 
-```bash
-sudo apt-get install docker-ce=5:26.0.2~3-0~ubuntu-$(lsb_release -cs) docker-ce-cli=5:26.0.2~3-0~ubuntu-$(lsb_release -cs) containerd.io
-```
+1. Ainda em **Variáveis do Sistema**, clique em **Novo**.  
+2. Preencha:  
+   - **Nome da variável:** `MAVEN_HOME`  
+   - **Valor da variável:** caminho da instalação do Maven, por exemplo:  
+     ```
+     C:\dev\tools\maven\maven1.0
+     ```  
+3. Clique em **OK**.  
 
-- **Instalar Docker Compose no Linux**
-  
-Abra o terminal e execute o seguinte comando para baixar a versão específica do Docker Compose:
+---
 
-```bash
-sudo curl -L "https://github.com/docker/compose/releases/download/v2.29.0/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
-```
+#### 4️⃣ Adicionar Maven ao `PATH`
 
-Após o download, é necessário garantir que o Docker Compose tenha permissões para ser executado. Execute:
+1. Na lista de **Variáveis do Sistema**, selecione a variável `Path` e clique em **Editar**.  
+2. Clique em **Novo** e adicione o caminho da pasta `bin` do Maven, por exemplo:  
+3. Clique em **OK** em todas as janelas para salvar.  
 
-```bash
-sudo chmod +x /usr/local/bin/docker-compose
-```
+---
 
-### 2. **Clonar o Repositório**
+#### 5️⃣ Testar se funcionou
 
-Clone este repositório para o seu ambiente local:
-
-```bash
-git clone https://github.com/seu-usuario/banco.git
-cd banco
-```
-
-### 3. **Rodar o Docker Compose**
-
-No diretório do projeto, execute o seguinte comando para construir e rodar a aplicação:
+Abra um terminal (Prompt de Comando ou PowerShell) e digite:  
 
 ```bash
-mvn clean package install -DskipTests
-docker-compose up --build
+java -version
+mvn -v
+Se estiver tudo certo, você verá a versão do Java e do Maven instalados.
 ```
+### 🐳 Instalando e Rodando o Docker no Windows
 
-Se você já tiver rodado o build anteriormente, pode rodar apenas:
+O Docker será usado para rodar o **WireMock**, simulando APIs externas para o projeto.
+
+---
+
+#### 1️⃣ Instalar Docker Desktop
+
+1. Baixe o **Docker Desktop** a partir do site oficial:  
+   [https://www.docker.com/products/docker-desktop](https://www.docker.com/products/docker-desktop)  
+2. Execute o instalador e siga as instruções.  
+3. Após a instalação, abra o **Docker Desktop** e verifique se está rodando.  
+
+---
+
+#### 2️⃣ Rodar o WireMock com Docker
+
+No terminal, dentro do diretório do projeto:
 
 ```bash
-docker-compose up
+cd C:\Este Computador\opt\dev\projetos\productservice
 ```
-
-### 4. **Acessar a Aplicação**
-
-Após a execução, sua aplicação estará disponível em:
-
+Execute o seguinte comando para iniciar o WireMock:
 ```bash
-http://localhost:8081
+docker run -d --name wiremock -p 8081:8080 \
+  -v C:\Este Computador\opt\dev\projetos\productservice\wiremock\mappings:/home/wiremock/mappings \
+  wiremock/wiremock-standalone:2.31.0
 ```
-
+#### 2️⃣ Testar o WireMock
+Abra o navegador ou use o terminal com curl:
+```bash
+curl http://localhost:8081
+```
 ### 4. **Diagrama**
 
 [Baixar ou Ver Diagrama em PDF](https://drive.google.com/drive/u/1/folders/1f4okF8AiSOoRMjUay4ZhFwGvRxC_oxR0)
