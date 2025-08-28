@@ -30,9 +30,9 @@ As variáveis de ambiente dizem ao sistema **onde encontrar o Java e o Maven**, 
 1. Em **Variáveis do Sistema**, clique em **Novo**.  
 2. Preencha:  
    - **Nome da variável:** `JAVA_HOME`  
-   - **Valor da variável:** caminho da instalação do Java 17, por exemplo:  
+   - **Valor da variável:** caminho da instalação do Java 17:  
      ```
-     C:\Program Files\Java\jdk-17
+     C:\opt\dev\tools\java\jdk-17
      ```  
 3. Clique em **OK**.  
 
@@ -43,21 +43,21 @@ As variáveis de ambiente dizem ao sistema **onde encontrar o Java e o Maven**, 
 1. Ainda em **Variáveis do Sistema**, clique em **Novo**.  
 2. Preencha:  
    - **Nome da variável:** `MAVEN_HOME`  
-   - **Valor da variável:** caminho da instalação do Maven, por exemplo:  
+   - **Valor da variável:** caminho da instalação do Maven:  
      ```
-     C:\dev\tools\maven\maven1.0
+     C:\opt\dev\tools\maven\apache-maven-3.9.11
      ```  
 3. Clique em **OK**.  
 
 ---
 
-#### 4️⃣ Adicionar Maven ao `PATH`
+#### 4️⃣ Adicionar Java e Maven ao `PATH`
 
 1. Na lista de **Variáveis do Sistema**, selecione a variável `Path` e clique em **Editar**.  
-2. Clique em **Novo** e adicione o caminho da pasta `bin` do Maven, por exemplo:  
+2. Clique em **Novo** e adicione as seguintes entradas:
+%JAVA_HOME%\bin
+%MAVEN_HOME%\bin
 3. Clique em **OK** em todas as janelas para salvar.  
-
----
 
 #### 5️⃣ Testar se funcionou
 
@@ -92,15 +92,11 @@ cd C:\Este Computador\opt\dev\projetos\productservice
 ```
 Execute o seguinte comando para iniciar o WireMock:
 ```bash
-docker run -d --name wiremock -p 8081:8080 \
-  -v C:\Este Computador\opt\dev\projetos\productservice\wiremock\mappings:/home/wiremock/mappings \
-  wiremock/wiremock-standalone:2.31.0
+docker run -d --name wiremock -p 8081:8080 -v C:\opt\dev\project\product-service\wiremock:/home/wiremock/mappings wiremock/wiremock
 ```
-#### 2️⃣ Testar o WireMock
-Abra o navegador ou use o terminal com curl:
+#### 1️⃣ Rodar o Spring Boot
+No terminal, dentro do diretório do projeto:
 ```bash
-curl http://localhost:8081
+mvn clean install
+mvn spring-boot:run
 ```
-### 4. **Diagrama**
-
-[Baixar ou Ver Diagrama em PDF](https://drive.google.com/drive/u/1/folders/1f4okF8AiSOoRMjUay4ZhFwGvRxC_oxR0)
