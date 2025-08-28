@@ -10,7 +10,7 @@ A aplicação é construída com **Java 17**, utiliza **Maven** para gerenciamen
 ---
 
 ## 🚀 Rodando a Aplicação Localmente
-O projeto está disponibilizado em um arquivo ZIP. Para rodá-lo localmente, considere que ele foi extraído diretamente na raiz do seu C:\. Recomendo usar o mesmo local para extrair e conseguir seguir as informações abaixo.
+O projeto está disponibilizado em um arquivo ZIP. Para rodá-lo localmente, considere que ele foi extraído diretamente na raiz do seu C:\ recomendo usar o mesmo local para extrair e conseguir seguir as informações abaixo.
  
 ### ⚙️ Configurando Variáveis de Ambiente no Windows
 
