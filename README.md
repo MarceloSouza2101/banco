@@ -10,7 +10,8 @@ A aplicação é construída com **Java 17**, utiliza **Maven** para gerenciamen
 ---
 
 ## 🚀 Rodando a Aplicação Localmente
-
+O projeto está disponibilizado em um arquivo ZIP. Para rodá-lo localmente, considere que ele foi extraído diretamente na raiz do seu C:\. Recomendo usar o mesmo local para extrair e conseguir seguir as informações abaixo.
+ 
 ### ⚙️ Configurando Variáveis de Ambiente no Windows
 
 As variáveis de ambiente dizem ao sistema **onde encontrar o Java e o Maven**, necessários para compilar e rodar o projeto.
@@ -84,12 +85,6 @@ O Docker será usado para rodar o **WireMock**, simulando APIs externas para o p
 ---
 
 #### 2️⃣ Rodar o WireMock com Docker
-
-No terminal, dentro do diretório do projeto:
-
-```bash
-cd C:\Este Computador\opt\dev\projetos\productservice
-```
 Execute o seguinte comando para iniciar o WireMock:
 ```bash
 docker run -d --name wiremock -p 8081:8080 -v C:\opt\dev\project\product-service\wiremock:/home/wiremock/mappings wiremock/wiremock
